@@ -6,7 +6,7 @@ import { Pokemon } from '../../interfaces';
 import { PokemonListResponse } from '../../interfaces/pokemon-list';
 import { getPokemonInfo } from '../../utils/getPokemonInfo';
 import confetti from 'canvas-confetti';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { localFavorites } from '../../utils';
 
 interface Props {
@@ -15,20 +15,13 @@ interface Props {
 
 const PokemonPageByName: NextPage<Props> = ({ pokemon }) => {
 
-  const [isInFavorites, setIsInFavorites] = useState(localFavorites.existInFavorites(pokemon.id));
+  const [isInFavorites, setIsInFavorites] = useState(false);
+  
+  useEffect(() => {}, [isInFavorites]);
 
   const onToggleFavorite = () => {
     localFavorites.toggleFavorite(pokemon.id);
     setIsInFavorites(!isInFavorites);
-
-    if (isInFavorites) return;
-
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 }
-
-    })
   }
 
   return (
@@ -53,7 +46,7 @@ const PokemonPageByName: NextPage<Props> = ({ pokemon }) => {
             <Card.Header css={{ display: 'flex', justifyContent: 'space-between' }}>
               <Text h1 transform='capitalize'>{pokemon.name}</Text>
               <Button
-                onClick={onToggleFavorite}
+                onPress={onToggleFavorite}
                 color='gradient' bordered ghost
               >
                 {isInFavorites ? 'Remove from Favorites' : 'Save in Favorites'}
