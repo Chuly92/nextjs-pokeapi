@@ -21,6 +21,16 @@ const PokemonPageByName: NextPage<Props> = ({ pokemon }) => {
 
   const onToggleFavorite = () => {
     localFavorites.toggleFavorite(pokemon.id);
+    
+    if (isInFavorites) return;
+    
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+      
+    })
+    
     setIsInFavorites(!isInFavorites);
   }
 
