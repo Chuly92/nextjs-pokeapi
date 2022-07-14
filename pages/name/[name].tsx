@@ -63,7 +63,7 @@ const PokemonPageByName: NextPage<Props> = ({ pokemon }) => {
             </Card.Header>
 
             <Card.Body>
-              <Text size={30}>Sprites:</Text>
+              <Text size={30} css={{textAlign: 'center'}}>Sprites</Text>
 
               <Container direction='row' display='flex' gap={0}>
                 <Image
